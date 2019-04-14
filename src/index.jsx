@@ -7,4 +7,4 @@ import { location, forecasts } from './data/forecast.json';
 
 // render(<App />, document.getElementById('root'));
 
-render(<App location={location} forecasts={forecasts} />, document.getElementById('root'));
+render(<App location={location} forecasts={forecasts} forecast={forecasts[0]} />, document.getElementById('root'));

@@ -22,7 +22,7 @@ it('renders the temperature', () => {
       icon="<WeatherIcon />"
     />
   ));
-  expect(wrapper.find('.forecast-summary__temperature').text()).toEqual('123');
+  expect(wrapper.find('.forecast-summary__temperature').text()).toEqual('123°c');
 });
 it('renders the description', () => {
   const wrapper = shallow((
