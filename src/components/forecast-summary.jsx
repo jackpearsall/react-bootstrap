@@ -9,6 +9,7 @@ const ForecastSummary = props => (
     <div className="forecast-summary__temperature"><span>{props.temperature}°c</span></div>
     <div className="forecast-summary__description"><span>{props.description}</span></div>
     <div className="forecast-summary__icon"><WeatherIcon name="owm" iconId={props.icon} /></div>
+    <button onClick={() => props.onSelect(props.date)}>More details</button>
   </div>
 );
 
