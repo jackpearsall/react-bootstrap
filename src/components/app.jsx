@@ -1,11 +1,13 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
 import LocationDetails from './location-details';
 import ForecastSummaries from './forecast-summaries';
-import '../styles/forecast-summaries.scss';
 import '../styles/app.scss';
 import ForecastDetails from './forecast-details';
 import axios from 'axios';
+import SearchForm from './search-form';
+
+const url = 'https://mcr-codes-weather.herokuapp.com/forecast';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -17,16 +19,37 @@ class App extends React.Component {
         city: '',
         country: '',
       },
+      error: false,
     };
     this.handleForecastSelect = this.handleForecastSelect.bind(this);
+    this.updateCity = this.updateCity.bind(this);
   }
 
+
   componentDidMount() {
-    axios.get('https://mcr-codes-weather.herokuapp.com/forecast')
+    axios.get(url)
       .then(response => {
         this.setState({
           forecasts: response.data.forecasts,
           location: response.data.location,
+        });
+      });
+  }
+
+  updateCity(city) {
+    // console.log(city);
+    // console.log(`${url}?city=${city}`);
+    axios.get(`${url}?city=${city}`)
+      .then(response => {
+        this.setState({
+          forecasts: response.data.forecasts,
+          location: response.data.location,
+        });
+        // console.log(this.state.location);
+      })
+      .catch(err => {
+        this.setState({
+          error: true,
         });
       });
   }
@@ -38,6 +61,15 @@ class App extends React.Component {
   }
 
   render() {
+    const { error } = this.state;
+    if (error) {
+      alert(':(');
+      // return (
+      //   <div className="errorScreen">
+      //   We're Sorry, try again :(
+      //   </div>
+      // );
+    }
     const selectedForecast =
       this.state.forecasts.find(forecast => forecast.date === this.state.selectedDate);
     return (
@@ -46,7 +78,13 @@ class App extends React.Component {
           city={this.state.location.city}
           country={this.state.location.country}
         />
-        <ForecastSummaries forecasts={this.state.forecasts} onForecastSelect={this.handleForecastSelect} />
+        <SearchForm
+          updateCity={this.updateCity}
+        />
+        <ForecastSummaries
+          forecasts={this.state.forecasts}
+          onForecastSelect={this.handleForecastSelect}
+        />
         {
             selectedForecast && <ForecastDetails forecast={selectedForecast} />
         }
@@ -54,14 +92,5 @@ class App extends React.Component {
     );
   }
 }
-
-// App.propTypes = {
-//   location: PropTypes.shape({
-//     city: PropTypes.string,
-//     country: PropTypes.string,
-//   }).isRequired,
-//   forecasts: PropTypes.array.isRequired,
-//   forecast: PropTypes.object.isRequired,
-// };
 
 export default App;

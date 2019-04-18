@@ -4,11 +4,11 @@ import WeatherIcon from 'react-icons-weather';
 import Moment from 'moment';
 
 const ForecastSummary = props => (
-  <div>
+  <div className="forecastSummary">
     <div className="forecast-summary__date"><span>{Moment(props.date).format('ddd Do MMM')}</span></div>
+    <div className="forecast-summary__icon"><WeatherIcon name="owm" iconId={props.icon} /></div>
     <div className="forecast-summary__temperature"><span>{props.temperature}°c</span></div>
     <div className="forecast-summary__description"><span>{props.description}</span></div>
-    <div className="forecast-summary__icon"><WeatherIcon name="owm" iconId={props.icon} /></div>
     <button onClick={() => props.onSelect(props.date)}>More details</button>
   </div>
 );
