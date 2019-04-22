@@ -16,7 +16,6 @@ class SearchForm extends React.Component {
   }
 
   handleSubmit() {
-    // console.log(this.state.searchText);
     this.props.updateCity(this.state.searchText);
   }
 

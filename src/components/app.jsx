@@ -1,10 +1,10 @@
 import React from 'react';
 import LocationDetails from './location-details';
 import ForecastSummaries from './forecast-summaries';
-import '../styles/app.scss';
 import ForecastDetails from './forecast-details';
 import axios from 'axios';
 import SearchForm from './search-form';
+import '../styles/app.scss';
 
 const url = 'https://mcr-codes-weather.herokuapp.com/forecast';
 
@@ -19,7 +19,7 @@ class App extends React.Component {
         city: '',
         country: '',
       },
-      error: false,
+      errorMessage: '',
     };
     this.handleForecastSelect = this.handleForecastSelect.bind(this);
     this.updateCity = this.updateCity.bind(this);
@@ -27,29 +27,20 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    axios.get(url)
-      .then(response => {
-        this.setState({
-          forecasts: response.data.forecasts,
-          location: response.data.location,
-        });
-      });
+    this.updateCity('');
   }
 
   updateCity(city) {
-    // console.log(city);
-    // console.log(`${url}?city=${city}`);
     axios.get(`${url}?city=${city}`)
       .then(response => {
         this.setState({
           forecasts: response.data.forecasts,
           location: response.data.location,
         });
-        // console.log(this.state.location);
       })
       .catch(err => {
         this.setState({
-          error: true,
+          errorMessage: err,
         });
       });
   }
@@ -61,14 +52,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { error } = this.state;
-    if (error) {
-      alert(':(');
-      // return (
-      //   <div className="errorScreen">
-      //   We're Sorry, try again :(
-      //   </div>
-      // );
+    const { errorMessage } = this.state;
+    if (errorMessage) {
+      alert(errorMessage);
     }
     const selectedForecast =
       this.state.forecasts.find(forecast => forecast.date === this.state.selectedDate);
@@ -85,9 +71,7 @@ class App extends React.Component {
           forecasts={this.state.forecasts}
           onForecastSelect={this.handleForecastSelect}
         />
-        {
-            selectedForecast && <ForecastDetails forecast={selectedForecast} />
-        }
+        { selectedForecast && <ForecastDetails forecast={selectedForecast} /> }
       </div>
     );
   }
