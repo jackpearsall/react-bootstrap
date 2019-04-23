@@ -20,6 +20,7 @@ class App extends React.Component {
         country: '',
       },
       errorMessage: '',
+      searchText: '',
     };
   }
 
@@ -39,9 +40,15 @@ class App extends React.Component {
       })
       .catch(err => {
         this.setState({
-          errorMessage: err,
+          errorMessage: 'There are no results, try again',
         });
       });
+  };
+
+  handleKeyDown = (event) => {
+    if (event.keyCode === 13) {
+      this.setState(this.updateCity(this.state.searchText));
+    }
   };
 
   handleForecastSelect = (date) => {
@@ -50,11 +57,14 @@ class App extends React.Component {
     });
   };
 
-  render() {
-    const { errorMessage } = this.state;
-    if (errorMessage) {
-      alert(errorMessage);
+  handleInputChange = (event) => {
+    this.setState({ searchText: event.target.value });
+    if (event.target.value === '') {
+      this.setState({ errorMessage: '' });
     }
+  };
+
+  render() {
     const selectedForecast =
       this.state.forecasts.find(forecast => forecast.date === this.state.selectedDate);
     return (
@@ -65,6 +75,10 @@ class App extends React.Component {
         />
         <SearchForm
           updateCity={this.updateCity}
+          errorMessage={this.state.errorMessage}
+          handleInputChange={this.handleInputChange}
+          handleKeyDown={this.handleKeyDown}
+          searchText={this.state.searchText}
         />
         <ForecastSummaries
           forecasts={this.state.forecasts}
