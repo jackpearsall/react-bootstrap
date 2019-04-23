@@ -27,10 +27,11 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    this.updateCity('');
+    this.updateCity('Hebden Bridge');
   }
 
   updateCity(city) {
+    this.setState({ errorMessage: '' });
     axios.get(`${url}?city=${city}`)
       .then(response => {
         this.setState({
