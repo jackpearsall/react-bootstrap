@@ -21,8 +21,6 @@ class App extends React.Component {
       },
       errorMessage: '',
     };
-    this.handleForecastSelect = this.handleForecastSelect.bind(this);
-    this.updateCity = this.updateCity.bind(this);
   }
 
 
@@ -30,7 +28,7 @@ class App extends React.Component {
     this.updateCity('Hebden Bridge');
   }
 
-  updateCity(city) {
+  updateCity = (city) => {
     this.setState({ errorMessage: '' });
     axios.get(`${url}?city=${city}`)
       .then(response => {
@@ -44,13 +42,13 @@ class App extends React.Component {
           errorMessage: err,
         });
       });
-  }
+  };
 
-  handleForecastSelect(date) {
+  handleForecastSelect = (date) => {
     this.setState({
       selectedDate: date,
     });
-  }
+  };
 
   render() {
     const { errorMessage } = this.state;
