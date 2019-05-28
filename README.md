@@ -1,13 +1,15 @@
-# React Bootstrap
+# Weather App :sunny: :umbrella: :snowflake:
 
-React boilerplate project for Manchester Codes' projects.
+React weather app project.
+
+<img width="1500" alt="Screenshot 2019-04-20 at 00 41 38" src="https://raw.githubusercontent.com/jackpearsall/react-bootstrap/master/Screenshot%20from%202019-04-23%2022-20-57.png">
 
 ## Getting Started
 
-### Clone down this repository (replace `<your_project_name>`:
+### Clone down this repository:
 
 ```bash
-git clone git@github.com:MCRcodes/react-bootstrap.git <your_project_name>
+git clone git@github.com:jackpearsall/weather-app.git
 ```
 
 ### Install dependencies
@@ -24,10 +26,14 @@ npm start
 
 ### Visit `localhost:8080` in your browser.
 
-You should see a **Hello World** message.
+You should see the weather app.
 
-### Change the rendered output
+### Created Using:
 
-You can change what is mounted to the DOM in `src/index.jsx`.
+ReactJS
+Sass
+Jest/Enzyme
 
-It might be a good idea to make an `App` component inside `App.jsx` (will likely handle your layout and routing), and to mount this to the DOM.
+### Author
+
+Jack Pearsall

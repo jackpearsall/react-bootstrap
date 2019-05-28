@@ -1,0 +1,46 @@
+.forecast {
+    margin-left: 20px;
+    margin-right: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.location-details {
+    text-align: center;
+}
+.searchBox {
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+.forecastSummary {
+    padding: 10px;
+}
+
+.forecast-summary__icon {
+    display: flex;
+    font-size: 50px;
+    padding: 10px 5px;
+    margin: 5px;
+}
+
+.forecast-summaries {
+    display: flex;
+    justify-content: space-between;
+}
+
+.forecast-details {
+    padding:10px;
+    text-align: center
+}
+
+.forecast-details div {
+    padding: 10px;
+}
+
+.error {
+    text-align: center;    
+    color: red;
+    padding-top: 15px;
+}
+
